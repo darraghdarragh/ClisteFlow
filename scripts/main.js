@@ -1,4 +1,4 @@
-// === DM Web Solutions — main.js (refined) ===
+// === ClisteFlow — main.js (refined) ===
 
 document.addEventListener("DOMContentLoaded", () => {
   const html = document.documentElement;
@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
       navToggle.setAttribute("aria-expanded", String(isOpen));
     });
 
-    // Close nav when clicking a link
     nav.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
         nav.classList.remove("open");
@@ -51,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // Close nav when clicking outside
     document.addEventListener("click", (e) => {
       const clickedInsideNav = nav.contains(e.target);
       const clickedToggle = navToggle.contains(e.target);
@@ -71,14 +69,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (themeToggle) {
       themeToggle.innerHTML = `<span>${label}</span>`;
-      themeToggle.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
-      themeToggle.setAttribute("title", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
+      themeToggle.setAttribute(
+        "aria-label",
+        `Switch to ${theme === "dark" ? "light" : "dark"} mode`
+      );
+      themeToggle.setAttribute(
+        "title",
+        `Switch to ${theme === "dark" ? "light" : "dark"} mode`
+      );
     }
 
     if (floatingTheme) {
       floatingTheme.textContent = label;
-      floatingTheme.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
-      floatingTheme.setAttribute("title", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
+      floatingTheme.setAttribute(
+        "aria-label",
+        `Switch to ${theme === "dark" ? "light" : "dark"} mode`
+      );
+      floatingTheme.setAttribute(
+        "title",
+        `Switch to ${theme === "dark" ? "light" : "dark"} mode`
+      );
     }
   };
 
@@ -88,8 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
     setThemeButtonLabel(theme);
   };
 
+  // Default to dark mode for new visitors.
+  // If a visitor manually chooses light mode, their choice is remembered.
   const savedTheme = localStorage.getItem("theme");
-  const initialTheme = savedTheme || "light";
+  const initialTheme = savedTheme || "dark";
   applyTheme(initialTheme);
 
   const toggleTheme = () => {
